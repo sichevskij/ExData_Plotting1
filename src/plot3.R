@@ -21,15 +21,15 @@ plot3 <- function( file ) {
 mk.plot3 <- function( epc, ...) {
         
         with( epc, {
-                plot( Date, Sub_metering_1
+                plot( Datetime, Sub_metering_1
                       , main = NA
                       , xlab = NA
                       , ylab = "Energy sub metering"
                       , type = "l",
                       , col  = "black")
                 
-                lines( Date, Sub_metering_2, col="red" )
-                lines( Date, Sub_metering_3, col="blue" )     
+                lines( Datetime, Sub_metering_2, col="red" )
+                lines( Datetime, Sub_metering_3, col="blue" )     
         })
         
         legend( "topright"

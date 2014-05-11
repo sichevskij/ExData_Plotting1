@@ -6,6 +6,7 @@ source("plot2.R")
 source("plot3.R")
 
 plot4 <- function( file ) {
+        
         epc <- NULL
         
         if ( ! exists("epc_cache") ) {
@@ -28,14 +29,14 @@ mk.plot4 <- function(epc) {
         mk.plot3(epc, box.lwd = 0)
         
         with( epc, {
-                plot( Date, Voltage
+                plot( Datetime, Voltage
                       , main = NA
                       , xlab = "datetime"
                       , ylab = "Voltage"
                       , type = "l",
                       , col  = "black")
                 
-                plot( Date, Global_reactive_power
+                plot( Datetime, Global_reactive_power
                       , main = NA
                       , xlab = "datetime"
                       , ylab = "Global_reactive_power"

@@ -20,7 +20,7 @@ plot2 <- function( file ) {
 }
 
 mk.plot2 <- function( epc ) {
-        plot( epc$Date, epc$Global_active_power
+        plot( epc$Datetime, epc$Global_active_power
               , main = NA
               , xlab = NA
               , ylab = "Global Active Power (kilowatts)"

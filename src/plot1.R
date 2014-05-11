@@ -4,6 +4,7 @@
 
 source("load.R")
 
+# This function produces PNG graphic.
 plot1 <- function( file ) {
         epc <- NULL
         
