@@ -4,13 +4,9 @@
 
 source("load.R")
 
-plot2 <- function( file ) {
-        epc <- NULL
+plot2 <- function(...) {
         
-        if ( ! exists("epc_cache") ) {
-                load( file )
-        }
-        epc <- epc_cache
+        epc <- load(...)
         
         png( filename = "plot2.png", bg = NA )
         

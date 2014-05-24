@@ -5,14 +5,9 @@ source("load.R")
 source("plot2.R")
 source("plot3.R")
 
-plot4 <- function( file ) {
+plot4 <- function(...) {
         
-        epc <- NULL
-        
-        if ( ! exists("epc_cache") ) {
-                load( file )
-        }
-        epc <- epc_cache
+        epc <- load(...)
         
         png( filename = "plot4.png", bg = NA )
         

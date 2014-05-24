@@ -3,13 +3,9 @@
 
 source("load.R")
 
-plot3 <- function( file ) {
-        epc <- NULL
+plot3 <- function(...) {
         
-        if ( ! exists("epc_cache") ) {
-                load( file )
-        }
-        epc <- epc_cache
+        epc <- load(...)
         
         png( filename = "plot3.png", bg = NA )
         

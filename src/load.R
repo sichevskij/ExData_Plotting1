@@ -3,35 +3,31 @@
 
 library(data.table)
 
+epc_cache <- NULL
+
 load <- function( file ="../household_power_consumption.txt" ) {
         
-        epc <- fread( file
-                      , sep = ";"
-                      , na.strings = "?"
-                      , colClasses = "character"
-        )
+        
+        if ( is.null( epc_cache ) ) {
                 
-        # Convert character representations to objects of Date classes.
-        epc[,  Date := as.Date(Date, "%d/%m/%Y")]
+                epc <- fread( file
+                              , sep = ";"
+                              , na.strings = "?"
+                              , header = TRUE
+                              , colClasses = "character" 
+#                              , verbose = TRUE
+                )
+                
+                # Select data from the dates 2007-02-01 and 2007-02-02
+                epc <- subset(epc, Date == "1/2/2007" | Date == "2/2/2007")
+                
+                # Convert character representations.
+                epc[, Datetime := as.POSIXct( paste(as.Date(Date, "%d/%m/%Y"), Time) )]
+                epc[, Global_active_power := as.numeric(Global_active_power)]
+                
+                # Set the cache.
+                epc_cache <<- epc
+        }
         
-
-        # Select data from the dates 2007-02-01 and 2007-02-02.
-        epc <- epc[ "2007-02-01" <= epc$Date & "2007-02-02" >= epc$Date , ]
-        
-        # Convert character representations.
-        epc <- transform(epc
-                         , Datetime = as.POSIXct( paste(Date, Time) )
-                         , Global_active_power = as.numeric(Global_active_power)
-                         , Global_reactive_power = as.numeric(Global_reactive_power)
-                         , Global_intensity = as.numeric(Global_intensity)
-                         , Voltage = as.numeric(Voltage)
-                         , Sub_metering_1 = as.numeric(Sub_metering_1)
-                         , Sub_metering_2 = as.numeric(Sub_metering_2)
-                         , Sub_metering_3 = as.numeric(Sub_metering_3)
-        )
-
-        # Set the cache.
-        epc_cache <<- epc
-        
-        return( epc )
+        return( epc_cache )
 }

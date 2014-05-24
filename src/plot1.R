@@ -5,14 +5,10 @@
 source("load.R")
 
 # This function produces PNG graphic.
-plot1 <- function( file ) {
-        epc <- NULL
+plot1 <- function(...) {
         
-        if ( ! exists("epc_cache") ) {
-                load( file )
-        }
-        epc <- epc_cache
-        
+        epc <- load(...)
+                
         png( filename = "plot1.png", bg = NA )
         
         mk.plot1( epc )
